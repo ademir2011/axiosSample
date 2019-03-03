@@ -34,6 +34,7 @@
   var $input = document.querySelector("input");
   var $dados = document.querySelector('[data-js="dadosUser"]');
   var $button = document.querySelector("button");
+  var $buttonAxios = document.querySelectorAll("button")[1];
 
   var handlerClick = function(e) {
     e.preventDefault();
@@ -46,5 +47,19 @@
       });
   };
 
+  var handlerClickAxios = function(e) {
+    e.preventDefault();
+    axios
+      .get("http://api.github.com/users/" + $input.value)
+      .then(function(response) {
+        console.log(response.data);
+      })
+      .catch(function(error) {
+        console.warn(error);
+      });
+  };
+
   $button.addEventListener("click", handlerClick, false);
+  $buttonAxios.addEventListener("click", handlerClickAxios, false);
+  
 })();
